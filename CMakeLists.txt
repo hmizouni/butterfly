@@ -54,6 +54,8 @@ set(GCC_COVERAGE_LINK_FLAGS    "-lgcov")
 
 option(ASAN "Asan" OFF)
 
+option(SECCOMP "Seccomp" OFF)
+
 # uninstall target
 configure_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake.in"

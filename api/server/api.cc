@@ -32,6 +32,8 @@ void Api::ProcessRequest(const std::string &request, std::string *response,
                          bool sub) {
     if (response == nullptr)
         return;
+    if (!pg_init_seccomp())
+	return;
     // Increment request counter
     app::stats.request_counter++;
 
