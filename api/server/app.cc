@@ -429,8 +429,10 @@ std::string GraphDot(struct pg_brick *brick) {
 }
 
 bool PgStart(std::string dpdk_args) {
+    printf("pg_start\n" );
     pg_npf_nworkers = 0;
     log.Debug(dpdk_args);
+    printf("dpdk args\n" );
     return pg_start_str(dpdk_args.c_str()) >= 0;
 }
 
