@@ -328,18 +328,30 @@ void Graph::Stop() {
 bool Graph::Start(std::string dpdk_args) {
     struct ether_addr mac;
     uint32_t useless, nic_capa_tx;
-
+    
+    printf(" strat graph\n");
+/*    if (pg_init_seccomp())   
+    {
+	printf(" seccomp ne marche pas\n");
+	return false;
+   }
+*/
     // Start packetgraph
-    if (!app::PgStart(dpdk_args)) {
+    int ret = app::PgStart(dpdk_args);
+    printf( "ret is %d\n",ret);
+    if (!ret) {
+	printf("pg ne start pas\n");
         return false;
     }
 
+    printf("pg start\n");
     // DPDK open log for us and we WANT our logs back !
     app::Log::Open();
 
     // Start Vhost
     vhost_start();
 
+    printf("vhost start\n");
     // Create nic brick
     if (app::config.dpdk_port < 0) {
         std::string m = "invalid DPDK port " +
